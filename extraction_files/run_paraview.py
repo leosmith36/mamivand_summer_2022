@@ -41,7 +41,7 @@ def run(file,name,output,img_name):
     renderView1.Update()
 
     # set scalar coloring
-    ColorBy(display, ('CELLS', 'fe'))
+    ColorBy(display, ('CELLS', 'c1'))
 
     # rescale color and/or opacity maps used to include current data range
     display.RescaleTransferFunctionToDataRange(True, False)
@@ -50,10 +50,10 @@ def run(file,name,output,img_name):
     display.SetScalarBarVisibility(renderView1, True)
 
     # get color transfer function/color map for 'fe'
-    feLUT = GetColorTransferFunction('fe')
+    feLUT = GetColorTransferFunction('c1')
 
     # get opacity transfer function/opacity map for 'fe'
-    fePWF = GetOpacityTransferFunction('fe')
+    fePWF = GetOpacityTransferFunction('c1')
 
     # Hide orientation axes
     renderView1.OrientationAxesVisibility = 0
