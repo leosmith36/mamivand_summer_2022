@@ -14,9 +14,8 @@ import tensorflow as tf
 import shutil
 
 results = os.listdir()
-tem = "tem_stuff3"
-image_names = os.listdir(os.path.join(tem,"images"))
-image_names.sort(key = lambda x : int(re.sub("\.tif", "", x)))
+image_names = os.listdir(os.path.join("cropped_images"))
+# image_names.sort(key = lambda x : int(re.sub("\.tif", "", x)))
 
 def process_images(path, shape):
     images = []
@@ -26,7 +25,7 @@ def process_images(path, shape):
         shutil.rmtree(output)
 
     for image_name in image_names:
-        total_path = os.path.join(tem,"images",image_name)
+        total_path = os.path.join("cropped_images",image_name)
 
         image = cv2.imread(total_path)
         image = np.array(tf.image.rgb_to_grayscale(image))
@@ -48,13 +47,20 @@ def process_images(path, shape):
             if not os.path.exists(output):
                 os.mkdir(output)
             cv2.imwrite(os.path.join(output,image_name), image)
-                
+            
             image = cv2.resize(image, (shape,shape))
             image = np.expand_dims(image, 2)
             image = np.array(image,dtype = float) / 255.0
-        
-            
+
+            image_v = tf.image.flip_left_right(image)
+            image_h = tf.image.flip_up_down(image)
+            image_i = tf.image.flip_up_down(image_v)
+
+
             images.append(image)
+            images.append(image_v)
+            images.append(image_h)
+            images.append(image_i)
             names.append(image_name)
 
     images = np.array(images)
@@ -64,7 +70,7 @@ def process_images(path, shape):
 
 def make_predictions(path):
     preds_df = pd.DataFrame()
-    if os.path.isdir(path) and path != tem:
+    if os.path.isdir(path) and os.path.exists(os.path.join(path, "saved_model")):
         output = os.path.join(path,"predictions.csv")
         model = models.load_model(os.path.join(path,"saved_model"))
         images,names = process_images(path, model.input_shape[1])
@@ -97,13 +103,14 @@ def make_predictions(path):
         k_list = np.append(k_list, k_stdev)
 
         img_list = names.copy()
+        img_list = list(np.repeat(img_list, 4))
         img_list.append("average")
         img_list.append("st_dev")
 
         preds_df = pd.DataFrame({"image": img_list, "m22" : m22_list, "k" : k_list})
         preds_df.to_csv(output, index = False)
     return preds_df
-    
+
 
 
 def main():

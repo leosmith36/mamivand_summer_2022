@@ -7,7 +7,7 @@ if os.path.exists("cropped_images"):
     shutil.rmtree("cropped_images")
 os.mkdir("cropped_images")
 
-image = Image.open("tem_ori.png")
+image = Image.open("tem_original.png")
 
 step = 20
 
