@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J ML_1     # job name
+#SBATCH -J ML_0     # job name
 #SBATCH -o log_slurm.o%j  # output and error file name (%j expands to jobID)
 #SBATCH --gres=gpu:1             # total number of tasks requested
 #SBATCH -p gpu         # queue (partition) -- defq, eduq, gpuq, shortq
@@ -26,7 +26,7 @@ module load slurm
 #export LIBRARY_PATH=/cm/shared/software/opt/linux-centos7-x86_64/gcc-9.2.0/libx11-1.7.0-u5s2reu2nx5vykhfimela2hmutk2vrg3/lib:${LIBRARY_PATH} 
 
 # Execute the program:
-python3 ml_1_lr_1e-3_ep_2500_bs_8_size_256_dc_200.py
+python3 ml_0_f_16_32_64_lr_1e-3_ep_4000_bs_8_size_128_dc_5e-6.py
 
 ## Some examples:
 # mpirun vasp_std

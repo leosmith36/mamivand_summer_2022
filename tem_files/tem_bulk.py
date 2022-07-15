@@ -14,14 +14,16 @@ import tensorflow as tf
 import shutil
 
 results = os.listdir()
-tem = "tem_stuff2"
+tem = "tem_stuff3"
 image_names = os.listdir(os.path.join(tem,"images"))
-image_names.sort(key = lambda x : int(re.sub("\.png", "", x)))
+image_names.sort(key = lambda x : int(re.sub("\.tif", "", x)))
 
 def process_images(path, shape):
     images = []
     names = []
     output = os.path.join(path,"processed_images")
+    if os.path.exists(output):
+        shutil.rmtree(output)
 
     for image_name in image_names:
         total_path = os.path.join(tem,"images",image_name)
@@ -33,7 +35,7 @@ def process_images(path, shape):
         
         image = np.array(image)
         # image = 255 - image
-        image = cv2.medianBlur(image, 3)
+        image = cv2.medianBlur(image, 5)
 
         # image = np.array(tf.bitwise.invert(image))
         
@@ -46,15 +48,10 @@ def process_images(path, shape):
             if not os.path.exists(output):
                 os.mkdir(output)
             cv2.imwrite(os.path.join(output,image_name), image)
-            if shape > 500:
-                image = cv2.resize(image, (128,128))
-                image = np.expand_dims(image, 0)
-                image = imagenet_utils.preprocess_input(image)
                 
-            else:
-                image = cv2.resize(image, (shape,shape))
-                image = np.expand_dims(image, 2)
-                image = np.array(image,dtype = float) / 255.0
+            image = cv2.resize(image, (shape,shape))
+            image = np.expand_dims(image, 2)
+            image = np.array(image,dtype = float) / 255.0
         
             
             images.append(image)
@@ -69,7 +66,6 @@ def make_predictions(path):
     preds_df = pd.DataFrame()
     if os.path.isdir(path) and path != tem:
         output = os.path.join(path,"predictions.csv")
-       
         model = models.load_model(os.path.join(path,"saved_model"))
         images,names = process_images(path, model.input_shape[1])
 
@@ -107,36 +103,6 @@ def make_predictions(path):
         preds_df = pd.DataFrame({"image": img_list, "m22" : m22_list, "k" : k_list})
         preds_df.to_csv(output, index = False)
     return preds_df
-
-        # cols = {}
-        # cols["names"] = []
-        # for name in names:
-        #     cols[name] = []
-        # cols["average"] = []
-        # cols["st_dev"] = []
-
-        # predictions_m22 = copy.deepcopy(cols)
-        # predictions_k = copy.deepcopy(cols)
-
-        # for i in range(len(names) + 3):
-        #     if i == 0:
-        #         predictions_m22["names"].append(path)
-        #     elif i < (len(names) + 1):
-        #         predictions_m22[names[i - 1]].append(m22_list[i - 1])
-        #     elif i == (len(names) + 1):
-        #         predictions_m22["average"].append(m22_list[-2])
-        #     else:
-        #         predictions_m22["st_dev"].append(m22_list[-1])
-        
-        # for i in range(len(names) + 3):
-        #     if i == 0:
-        #         predictions_k["names"].append(path)
-        #     elif i < (len(names) + 1):
-        #         predictions_k[names[i - 1]].append(k_list[i - 1])
-        #     elif i == (len(names) + 1):
-        #         predictions_k["average"].append(k_list[-2])
-        #     else:
-        #         predictions_k["st_dev"].append(k_list[-1])
     
 
 
