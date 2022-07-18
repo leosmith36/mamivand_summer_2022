@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dirs=($(find . -name "run_?_*"))
+dirs=($(find . -name "run_*_*"))
 
 count=0
 total=0
