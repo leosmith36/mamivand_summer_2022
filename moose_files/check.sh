@@ -4,6 +4,7 @@ dirs=($(find . -name "run_m*"))
 
 count=0
 total=0
+failed=0
 
 touch status.txt
 date >> status.txt
@@ -19,20 +20,24 @@ do
     else
         logfile=($(find . -name "log_*"))
         if test -f "$logfile"
-        then   
-            line="$(grep "dt =" $logfile | tail -1)"
- 
-	    echo $item, $line
-	    
-            echo "$item, $line" >> ../status.txt
-	fi 
-   fi
+        then
+            if grep -q "terminated" "$logfile"
+            then
+                failed=$(($failed+1))
+                echo $item, failed 
+            else   
+                line="$(grep "dt =" $logfile | tail -1)"
+	            echo $item, $line
+                echo "$item, $line" >> ../status.txt
+            fi
+        fi 
+    fi
 
     total=$(($total+1))
 
     cd ..
 done
 echo "---" >> status.txt
-echo $count out of $total completed
+echo $count out of $total completed, $failed failed
 
 #echo "scale=2 ; $count / $total" | bc
