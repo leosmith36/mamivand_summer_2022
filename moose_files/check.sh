@@ -27,8 +27,14 @@ do
                 echo $item, failed 
             else   
                 line="$(grep "dt =" $logfile | tail -1)"
-	            echo $item, $line
-                echo "$item, $line" >> ../status.txt
+                if [[ $line == *"dt"* ]]
+                then
+                    echo $item, $line
+                    echo "$item, $line" >> ../status.txt
+                else
+                    failed=$(($failed+1))
+                    echo $item, failed 
+                fi
             fi
         fi 
     fi
