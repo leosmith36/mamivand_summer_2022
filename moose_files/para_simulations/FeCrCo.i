@@ -292,7 +292,7 @@
   l_tol = 1e-6
   nl_max_its = 15
   nl_abs_tol = 1e-9
-  end_time = 360000
+  end_time = 14400
   petsc_options_iname = '-pc_type -ksp_gmres_restart -sub_ksp_type
                          -sub_pc_type -pc_asm_overlap'
   petsc_options_value = 'asm      31                  preonly
