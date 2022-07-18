@@ -21,13 +21,13 @@ tol=0.001
 
 ## For loop for running all the jobs over super computer (R2 or Borah)
 
-for i in {0..4} ##all rows ${#cr[*]} 
+for i in {0..7} ##all rows ${#cr[*]} 
 do
 	## Make a directory for new job with its name
 	mkdir run_"$i"_m22_${m22[$i]}_m33_${m33[$i]}_m23_${m23[$i]}_k_${k[$i]}
 	
 	## Copy all the required files to new directory
-	cp -R build include Makefile scripts test doc lib README.md pf1-opt LICENSE run_tests src ./run_"$i"_m22_${m22[$i]}_m33_${m33[$i]}_m23_${m23[$i]}_k_${k[$i]}
+	cp -R build include Makefile scripts test doc lib README.md pf2-opt LICENSE run_tests src ./run_"$i"_m22_${m22[$i]}_m33_${m33[$i]}_m23_${m23[$i]}_k_${k[$i]}
 	
 	## Move to new directory
 	cd run_"$i"_m22_${m22[$i]}_m33_${m33[$i]}_m23_${m23[$i]}_k_${k[$i]}

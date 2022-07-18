@@ -27,7 +27,7 @@ module load moose-dev-gcc
 export LIBRARY_PATH=/cm/shared/software/opt/linux-centos7-x86_64/gcc-9.2.0/libx11-1.7.0-u5s2reu2nx5vykhfimela2hmutk2vrg3/lib:${LIBRARY_PATH} 
 
 # Execute the program:
-mpiexec -n 8 ./pf1-opt -i FeCrCo.i --n-threads=16
+mpiexec -n 8 ./pf2-opt -i FeCrCo.i --n-threads=16
 
 ## Some examples:
 # mpirun vasp_std
