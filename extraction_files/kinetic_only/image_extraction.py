@@ -6,6 +6,8 @@ import shutil
 from nonconverge import get_fails
 
 # This script gets all of the output files from output_files and generates images and csv files from them
+# To extract the files, this is the "main" file that you should run with the following files in the same
+# directory: get_results.py, nonconverge.py, results_filter.py, and run_paraview.py
 
 def main():
     # The current working directory (change this to the directory of this script)

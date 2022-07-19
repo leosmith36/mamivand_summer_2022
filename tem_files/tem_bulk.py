@@ -13,6 +13,8 @@ silence_tensorflow()
 import tensorflow as tf
 import shutil
 
+# This script is for running TEM images through the ML model to predict the parameters
+
 results = os.listdir()
 image_names = os.listdir(os.path.join("cropped_images"))
 # image_names.sort(key = lambda x : int(re.sub("\.tif", "", x)))

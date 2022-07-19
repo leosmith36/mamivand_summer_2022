@@ -3,6 +3,8 @@ from PIL import Image
 import os
 import shutil
 
+# This file automatically crops the TEM image across the given x and y ranges
+
 if os.path.exists("cropped_images"):
     shutil.rmtree("cropped_images")
 os.mkdir("cropped_images")
