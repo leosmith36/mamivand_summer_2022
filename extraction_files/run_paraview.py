@@ -9,7 +9,7 @@ def run(file,name,output,img_name):
     paraview.simple._DisableFirstRenderCameraReset()
 
     # create a new 'IOSS Reader'
-    reader = IOSSReader(registrationName=name, FileName=[file])
+    feCrCo_m22_21535e26_m33_568588e27_m23_830169e28_k_166458e14_exoduse = IOSSReader(registrationName=name, FileName=[file])
 
     # get animation scene
     animationScene1 = GetAnimationScene()
@@ -21,18 +21,18 @@ def run(file,name,output,img_name):
     renderView1 = GetActiveViewOrCreate('RenderView')
 
     # show data in view
-    display = Show(reader, renderView1, 'UnstructuredGridRepresentation')
+    feCrCo_m22_21535e26_m33_568588e27_m23_830169e28_k_166458e14_exoduseDisplay = Show(feCrCo_m22_21535e26_m33_568588e27_m23_830169e28_k_166458e14_exoduse, renderView1, 'UnstructuredGridRepresentation')
 
     # trace defaults for the display properties.
-    display.Representation = 'Surface'
+    feCrCo_m22_21535e26_m33_568588e27_m23_830169e28_k_166458e14_exoduseDisplay.Representation = 'Surface'
 
     # reset view to fit data
     renderView1.ResetCamera(False)
 
     #changing interaction mode based on data extents
     renderView1.InteractionMode = '2D'
-    renderView1.CameraPosition = [100.0, 100.0, 10000.0]
-    renderView1.CameraFocalPoint = [100.0, 100.0, 0.0]
+    renderView1.CameraPosition = [250.0, 250.0, 10000.0]
+    renderView1.CameraFocalPoint = [250.0, 250.0, 0.0]
 
     # get the material library
     materialLibrary1 = GetMaterialLibrary()
@@ -41,31 +41,25 @@ def run(file,name,output,img_name):
     renderView1.Update()
 
     # set scalar coloring
-    ColorBy(display, ('CELLS', 'c1'))
+    ColorBy(feCrCo_m22_21535e26_m33_568588e27_m23_830169e28_k_166458e14_exoduseDisplay, ('CELLS', 'c1'))
 
     # rescale color and/or opacity maps used to include current data range
-    display.RescaleTransferFunctionToDataRange(True, False)
+    feCrCo_m22_21535e26_m33_568588e27_m23_830169e28_k_166458e14_exoduseDisplay.RescaleTransferFunctionToDataRange(True, False)
 
     # show color bar/color legend
-    display.SetScalarBarVisibility(renderView1, True)
+    feCrCo_m22_21535e26_m33_568588e27_m23_830169e28_k_166458e14_exoduseDisplay.SetScalarBarVisibility(renderView1, True)
 
-    # get color transfer function/color map for 'fe'
-    feLUT = GetColorTransferFunction('c1')
+    # get color transfer function/color map for 'c1'
+    c1LUT = GetColorTransferFunction('c1')
 
-    # get opacity transfer function/opacity map for 'fe'
-    fePWF = GetOpacityTransferFunction('c1')
+    # get opacity transfer function/opacity map for 'c1'
+    c1PWF = GetOpacityTransferFunction('c1')
 
     # Hide orientation axes
     renderView1.OrientationAxesVisibility = 0
 
     # Apply a preset using its name. Note this may not work as expected when presets have duplicate names.
-    feLUT.ApplyPreset('Grayscale', True)
-
-    # hide color bar/color legend
-    display.SetScalarBarVisibility(renderView1, False)
-
-    # show color bar/color legend
-    display.SetScalarBarVisibility(renderView1, True)
+    c1LUT.ApplyPreset('Grayscale', True)
 
     # get layout
     layout1 = GetLayout()
@@ -75,13 +69,13 @@ def run(file,name,output,img_name):
 
     # current camera placement for renderView1
     renderView1.InteractionMode = '2D'
-    renderView1.CameraPosition = [100.0, 100.0, 10000.0]
-    renderView1.CameraFocalPoint = [100.0, 100.0, 0.0]
-    renderView1.CameraParallelScale = 141.4213562373095
+    renderView1.CameraPosition = [250.0, 250.0, 10000.0]
+    renderView1.CameraFocalPoint = [250.0, 250.0, 0.0]
+    renderView1.CameraParallelScale = 353.5533905932738
 
     # save screenshot
     SaveScreenshot(os.path.join(output,img_name), renderView1, ImageResolution=[1304, 540],
-        TransparentBackground=1)
+    TransparentBackground=1)
 
     #================================================================
     # addendum: following script captures some of the application
@@ -99,9 +93,9 @@ def run(file,name,output,img_name):
 
     # current camera placement for renderView1
     renderView1.InteractionMode = '2D'
-    renderView1.CameraPosition = [100.0, 100.0, 10000.0]
-    renderView1.CameraFocalPoint = [100.0, 100.0, 0.0]
-    renderView1.CameraParallelScale = 141.4213562373095
+    renderView1.CameraPosition = [250.0, 250.0, 10000.0]
+    renderView1.CameraFocalPoint = [250.0, 250.0, 0.0]
+    renderView1.CameraParallelScale = 353.5533905932738
 
     #--------------------------------------------
     # uncomment the following to render all views

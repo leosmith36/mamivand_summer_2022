@@ -38,7 +38,7 @@ def main():
     ifiles = []
     inames = []
     for dir in all_dirs:
-        if dir.startswith("run_m"):
+        if dir.startswith("run_"):
             all_files = os.listdir(os.path.join(folder,dir))
             csv = False
             inputfile = None
