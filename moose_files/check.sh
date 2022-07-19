@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# This file allows you to check the status of multiple jobs at one time. Simple place it in 
+# the directory of your batch in Borah and run it as a Bash script.
 dirs=($(find . -name "run_*_*"))
 
 count=0

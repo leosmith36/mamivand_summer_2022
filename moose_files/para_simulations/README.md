@@ -1,1 +1,3 @@
-This job is for running images with the Para processing history.
+# MOOSE input files for Para
+
+These are the MOOSE input files that utilize the Para image processing history and allow you to change the kinetics parameters.
