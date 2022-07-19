@@ -6,7 +6,12 @@ from parameters import main
 
 pars = np.array(main())
 
-mult = []
+mult = [
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,5,1,1],
+    [1,1,1,1,1,5,1],
+    [1,1,1,1,1,1,5]
+]
 
 print("Creating a spreadsheet with %d total runs..."%len(mult))
 

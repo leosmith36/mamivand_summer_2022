@@ -27,13 +27,13 @@ tol=0.001
 for i in {0..8} ##all rows ${#cr[*]} 
 do
 	## Make a directory for new job with its name
-	mkdir run_"$i"_m22_${m22[$i]}_m33_${m33[$i]}_m23_${m23[$i]}_k_${k[$i]}_lab_${lab[$i]}_lac_${lac[$i]}_lbc_${lbc[$i]}
+	mkdir run_"$i"
 	
 	## Copy all the required files to new directory
-	cp -R build include Makefile scripts test doc lib README.md tm1-opt LICENSE run_tests src ./run_"$i"_m22_${m22[$i]}_m33_${m33[$i]}_m23_${m23[$i]}_k_${k[$i]}_lab_${lab[$i]}_lac_${lac[$i]}_lbc_${lbc[$i]}
+	cp -R build include Makefile scripts test doc lib README.md tm1-opt LICENSE run_tests src ./run_"$i"
 	
 	## Move to new directory
-	cd run_"$i"_m22_${m22[$i]}_m33_${m33[$i]}_m23_${m23[$i]}_k_${k[$i]}_lab_${lab[$i]}_lac_${lac[$i]}_lbc_${lbc[$i]}
+	cd run_"$i"
 
 	## Making the min and max for compositions for using in MOOSE input file
     crmin=$(echo $cr - $tol | bc)

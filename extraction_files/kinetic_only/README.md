@@ -1,0 +1,1 @@
+These files are for extracting microstructure images from Exodus files, where only kinetic parameters are being controlled.
