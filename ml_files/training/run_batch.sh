@@ -18,7 +18,7 @@ IFS=$OLDIFS # restore orig setting
 
 ## For loop for running all the jobs over super computer (R2 or Borah)
 
-for i in {0..5} ##all rows ${#cr[*]} 
+for i in {0..3} ##all rows ${#cr[*]} 
 do
 	## Make a directory for new job with its name
 	mkdir run_"$i"_f_${f1[$i]}_${f2[$i]}_${f3[$i]}_lr_${lr[$i]}_ep_${ep[$i]}_bs_${bs[$i]}_size_${size[$i]}_dc_${dc[$i]}

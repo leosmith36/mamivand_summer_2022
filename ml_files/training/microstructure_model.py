@@ -44,7 +44,7 @@ from keras.backend import sigmoid
 # %%
 # Where the images and data come from
 input = os.path.join("..","..","data")
-# input = os.path.join('data')
+# input = os.path.join("..",'data')
 # input = "C:\\Users\\leomo\\Documents\\Boise\\mamivand\\data"
 image_dir = os.path.join(input, "spinodal_images", "crop_images")
 # Where output csv files will go
@@ -62,6 +62,9 @@ os.mkdir(output)
 print("Reading data...")
 # data = pd.read_csv(os.path.join(input,"results","spinodal_results.csv"))
 data = pd.DataFrame()
+
+# %%
+# size_ = 256
 
 # %% [markdown]
 # ### Get the images, and resize and rescale them
@@ -210,7 +213,7 @@ cnn = Model(input, x)
 learning_rate = lr_
 epochs = ep_
 batch_size = bs_
-decay = lr_ / dc_
+decay = dc_
 
 # %% [markdown]
 # ### Combines the MLP and CNN into one network and compiles the model
@@ -230,7 +233,7 @@ model.compile(loss = "mean_absolute_percentage_error", optimizer = opt)
 
 # %%
 print("Training model...")
-# es = EarlyStopping(monitor = "val_loss", min_delta = 1, patience = 50, verbose = 1, mode = "min")
+# es = EarlyStopping(monitor = "val_loss", min_delta = 0.1, patience = 100, verbose = 1, mode = "min", baseline = 4.0)
 result = model.fit(
     x = trainX_images,
     y = trainY,
